@@ -30,7 +30,7 @@ buildscript {
         val commonIOVersion = "2.19.0"
         val jbakeVersion = "5.5.0"
         val tukaaniVersion = "1.10"
-        val deps = listOf(
+        listOf(
             "org.jbake:jbake-gradle-plugin:$jbakeVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "commons-io:commons-io:$commonIOVersion",
@@ -41,8 +41,7 @@ buildscript {
             "org.eclipse.jgit:org.eclipse.jgit.archive:$jgitVersion",
             "org.eclipse.jgit:org.eclipse.jgit.ssh.jsch:$jgitVersion",
             "org.tukaani:xz:$tukaaniVersion",
-        )
-        deps.map { classpath(it) }
+        ).map { classpath(it) }
     }
 }
 
