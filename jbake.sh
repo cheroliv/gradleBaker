@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-jbake -b -s . build/jbake/;
+jbake -b -s site
