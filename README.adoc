@@ -21,3 +21,58 @@ chmod u+x jbake.sh
 ```
 ./gradlew publishSite
 ```
+
+=== Créer le Fichier de Configuration
+
+Créez un fichier YAML (par exemple, `managed-jbake-context.yml`) à la racine de votre projet. Ce fichier centralise toutes les informations nécessaires au déploiement.
+
+.managed-jbake-context.yml
+[source,yaml]
+----
+# Paramètres JBake
+bake:
+  # Répertoire source pour le contenu, les assets et les templates de JBake
+  srcPath: "site"
+  # Répertoire de destination pour le site généré
+  destDirPath: "bake"
+  # (Optionnel) Le domaine pour le fichier CNAME. Si fourni, un fichier CNAME sera créé.
+  cname: "www.votre-domaine.com"
+
+# Paramètres de déploiement pour le site statique principal
+pushPage:
+  # (Optionnel) Répertoire source pour le push, relatif au répertoire de build. Par défaut destDirPath.
+  from: "bake"
+  # (Optionnel) Répertoire cible dans le dépôt cloné. Par défaut la racine.
+  to: "cvs"
+  # Détails du dépôt Git
+  repo:
+    # Un identifiant local pour le dépôt
+    name: "mon-site-statique"
+    # L'URI de votre dépôt GitHub
+    repository: "https://github.com/VotreNom/VotreDepot.git"
+    # Identifiants pour l'authentification
+    credentials:
+      username: "VotreNomDUtilisateur"
+      # IMPORTANT : Utilisez une variable d'environnement ou un secret pour le jeton
+      password: "${GITHUB_TOKEN:-votre_pat_github}"
+  # La branche sur laquelle déployer le site
+  branch: "gh-pages"
+  # Le message de commit pour le déploiement
+  message: "Déploiement du site statique"
+
+# Paramètres de déploiement pour un asset secondaire, comme une maquette
+pushMaquette:
+  # Répertoire source pour la maquette, relatif à la racine du projet
+  from: "maquette"
+  # (Optionnel) Répertoire cible dans le dépôt cloné. Par défaut la racine.
+  to: "cvs"
+  repo:
+    name: "ma-maquette"
+    repository: "https://github.com/VotreNom/DepotMaquette.git"
+    credentials:
+      username: "VotreNomDUtilisateur"
+      password: "${GITHUB_TOKEN:-votre_pat_github}"
+  branch: "main"
+  message: "Déploiement de la maquette"
+----
+
