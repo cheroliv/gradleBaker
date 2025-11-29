@@ -59,20 +59,5 @@ pushPage:
   branch: "gh-pages"
   # Le message de commit pour le déploiement
   message: "Déploiement du site statique"
-
-# Paramètres de déploiement pour un asset secondaire, comme une maquette
-pushMaquette:
-  # Répertoire source pour la maquette, relatif à la racine du projet
-  from: "maquette"
-  # (Optionnel) Répertoire cible dans le dépôt cloné. Par défaut la racine.
-  to: "cvs"
-  repo:
-    name: "ma-maquette"
-    repository: "https://github.com/VotreNom/DepotMaquette.git"
-    credentials:
-      username: "VotreNomDUtilisateur"
-      password: "${GITHUB_TOKEN:-votre_pat_github}"
-  branch: "main"
-  message: "Déploiement de la maquette"
 ----
 
